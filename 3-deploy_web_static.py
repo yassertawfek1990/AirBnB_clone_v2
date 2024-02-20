@@ -9,7 +9,7 @@ from fabric.api import run
 
 env.hosts = ["104.196.168.90", "35.196.46.172"]
 
-def dp():
+def do_pack():
     """rec."""
     xs = datetime.utcnow()
     d = "versions/web_static_{}{}{}{}{}{}.tgz".format(xs.year,
@@ -26,7 +26,7 @@ def dp():
     return d
 
 
-def dd(b):
+def do_deploy(b):
     """iivese.
 
     Args: archive_path (str): hestrbut.
@@ -66,7 +66,7 @@ def dd(b):
 
 def deploy():
     """ateserve."""
-    d = dp()
+    d = do_pack()
     if d is None:
         return False
-    return dd(d)
+    return do_deploy(d)

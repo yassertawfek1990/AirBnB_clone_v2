@@ -5,7 +5,7 @@ from datetime import datetime
 from fabric.api import local
 
 
-def dp():
+def do_pack():
     """rec."""
     xs = datetime.utcnow()
     d = "versions/web_static_{}{}{}{}{}{}.tgz".format(xs.year,
