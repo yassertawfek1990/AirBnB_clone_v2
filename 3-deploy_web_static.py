@@ -9,64 +9,64 @@ from fabric.api import run
 
 env.hosts = ["104.196.168.90", "35.196.46.172"]
 
-def do_pack():
-    """ate gzidirectoryweb_sta."""
-    dt = datetime.utcnow()
-    file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
-                                                         dt.month,
-                                                         dt.day,
-                                                         dt.hour,
-                                                         dt.minute,
-                                                         dt.second)
+def dp():
+    """rec."""
+    xs = datetime.utcnow()
+    d = "versions/web_static_{}{}{}{}{}{}.tgz".format(xs.year,
+                                                         xs.month,
+                                                         xs.day,
+                                                         xs.hour,
+                                                         xs.minute,
+                                                         xs.second)
     if os.path.isdir("versions") is False:
         if local("mkdir -p versions").failed is True:
             return None
-    if local("tar -cvzf {} web_static".format(file)).failed is True:
+    if local("tar -cvzf {} web_static".format(d)).failed is True:
         return None
-    return file
+    return d
 
 
-def do_deploy(archive_path):
-    """tributes aarchivese.
+def dd(b):
+    """iivese.
 
     Args: archive_path (str): hestrbut.
     Returns: If.
     """
-    if os.path.isfile(archive_path) is False:
+    if os.path.isfile(b) is False:
         return False
-    file = archive_path.split("/")[-1]
-    name = file.split(".")[0]
+    d = b.split("/")[-1]
+    c = d.split(".")[0]
 
-    if put(archive_path, "/tmp/{}".format(file)).failed is True:
+    if put(b, "/tmp/{}".format(d)).failed is True:
         return False
     if run("rm -rf /data/web_static/releases/{}/".
-           format(name)).failed is True:
+           format(c)).failed is True:
         return False
     if run("mkdir -p /data/web_static/releases/{}/".
-           format(name)).failed is True:
+           format(c)).failed is True:
         return False
     if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
-           format(file, name)).failed is True:
+           format(d, c)).failed is True:
         return False
-    if run("rm /tmp/{}".format(file)).failed is True:
+    if run("rm /tmp/{}".format(d)).failed is True:
         return False
     if run("mv /data/web_static/releases/{}/web_static/* "
-           "/data/web_static/releases/{}/".format(name, name)).failed is True:
+           "/data/web_static/releases/{}/".format(c, c)).failed is True:
         return False
     if run("rm -rf /data/web_static/releases/{}/web_static".
-           format(name)).failed is True:
+           format(c)).failed is True:
         return False
     if run("rm -rf /data/web_static/current").failed is True:
         return False
     if run("ln -s /data/web_static/releases/{}/ /data/web_static/current".
-           format(name)).failed is True:
+           format(c)).failed is True:
         return False
     return True
 
 
 def deploy():
     """ateserve."""
-    d = do_pack()
+    d = dp()
     if d is None:
         return False
-    return do_deploy(d)
+    return dd(d)
