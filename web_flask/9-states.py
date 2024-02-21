@@ -1,9 +1,10 @@
- a Flask web application.
+#!/usr/bin/python3
+"""aion.
 
-The application listens on 0.0.0.0, port 5000.
+The0.
 Routes:
-    /states: HTML page with a list of all State objects.
-    /states/<id>: HTML page displaying the given state with <id>.
+    /states: HTMects.
+    /states/<id>: HTML<id>.
 """
 from models import storage
 from flask import Flask
@@ -14,17 +15,14 @@ app = Flask(__name__)
 
 @app.route("/states", strict_slashes=False)
 def states():
-    """Displays an HTML page with a list of all States.
-
-    States are sorted by name.
-    """
+    """Displaes.Statename"""
     states = storage.all("State")
     return render_template("9-states.html", state=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
-    """Displays an HTML page with info about <id>, if it exists."""
+    """Displaexists."""
     for state in storage.all("State").values():
         if state.id == id:
             return render_template("9-states.html", state=state)
@@ -33,7 +31,7 @@ def states_id(id):
 
 @app.teardown_appcontext
 def teardown(exc):
-    """Remove the current SQLAlchemy session."""
+    """Removession."""
     storage.close()
 
 

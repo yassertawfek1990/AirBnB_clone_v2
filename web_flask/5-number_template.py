@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""Starts a Flask web application.
+"""Starion.
 
-The application listens on 0.0.0.0, port 5000.
+The applicat000.
 Routes:
-    /: Displays 'Hello HBNB!'.
-    /hbnb: Displays 'HBNB'.
-    /c/<text>: Displays 'C' followed by the value of <text>.
-    /python/(<text>): Displays 'Python' followed by the value of <text>.
-    /number/<n>: Displays 'n is a number' only if <n> is an integer.
-    /number_template/<n>: Displays an HTML page only if <n> is an integer.
+    /: zdc
+    /hbnb: DisHBNB'.
+    /c/<text>: Displayxt>.
+    /python/(<text>): Dsplaytext>.
+    /number/<n>: Displaysnteger.
+    /number_template/<n>: Dispinteger.
 """
 from flask import Flask
 from flask import render_template
@@ -18,22 +18,21 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
-    """Displays 'Hello HBNB!'"""
+    """DisplNB!'"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """Displays 'HBNB'"""
+    """DisplBNB'"""
     return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def c(text):
-    """Displays 'C' followed by the value of <text>
+    """Displatext>
 
-    Replaces any underscores in <text> with slashes.
-    """
+    Replaclashes."""
     text = text.replace("_", " ")
     return "C {}".format(text)
 
@@ -41,23 +40,22 @@ def c(text):
 @app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python(text="is cool"):
-    """Displays 'Python' followed by the value of <text>
+    """Displaysext>
 
-    Replaces any underscores in <text> with slashes.
-    """
+    Replaashes."""
     text = text.replace("_", " ")
     return "Python {}".format(text)
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    """Displays 'n is a number' only if <n> is an integer."""
+    """Displainteger."""
     return "{} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def number_template(n):
-    """Displays an HTML page only if <n> is an integer."""
+    """Displaysinteger."""
     return render_template("5-number.html", n=n)
 
 

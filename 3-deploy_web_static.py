@@ -7,17 +7,19 @@ from fabric.api import local
 from fabric.api import put
 from fabric.api import run
 
+
 env.hosts = ["104.196.168.90", "35.196.46.172"]
+
 
 def do_pack():
     """rec."""
     xs = datetime.utcnow()
     d = "versions/web_static_{}{}{}{}{}{}.tgz".format(xs.year,
-                                                         xs.month,
-                                                         xs.day,
-                                                         xs.hour,
-                                                         xs.minute,
-                                                         xs.second)
+                                                      xs.month,
+                                                      xs.day,
+                                                      xs.hour,
+                                                      xs.minute,
+                                                      xs.second)
     if os.path.isdir("versions") is False:
         if local("mkdir -p versions").failed is True:
             return None

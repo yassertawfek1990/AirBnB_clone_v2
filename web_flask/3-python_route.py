@@ -1,11 +1,12 @@
- a Flask web application.
+#!/usr/bin/python3
+"""Startplication.
 
-The application listens on 0.0.0.0, port 5000.
+The000.
 Routes:
-    /: Displays 'Hello HBNB!'.
-    /hbnb: Displays 'HBNB'.
-    /c/<text>: Displays 'C' followed by the value of <text>.
-    /python/(<text>): Displays 'Python' followed by the value of <text>.
+    /: DisplaysBNB!'.
+    /hbnb: DisplaysBNB'.
+    /c/<text>: Displaytext>.
+    /python/(<text>): Displays<text>.
 """
 from flask import Flask
 
@@ -14,22 +15,21 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
-    """Displays 'Hello HBNB!'."""
+    """Displa"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """Displays 'HBNB'."""
+    """DisplayHBNB."""
     return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def c(text):
-    """Displays 'C' followed by the value of <text>.
+    """Displ<text>.
 
-    Replaces any underscores in <text> with slashes.
-    """
+    Replashes."""
     text = text.replace("_", " ")
     return "C {}".format(text)
 
@@ -37,10 +37,9 @@ def c(text):
 @app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python(text="is cool"):
-    """Displays 'Python' followed by the value of <text>.
+    """Displays <text>.
 
-    Replaces any underscores in <text> with slashes.
-    """
+    Replacelashes."""
     text = text.replace("_", " ")
     return "Python {}".format(text)
 

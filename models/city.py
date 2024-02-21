@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the City class."""
+"""Defnass."""
 from models.base_model import Base
 from models.base_model import BaseModel
 from sqlalchemy import Column
@@ -14,9 +14,9 @@ class City(BaseModel, Base):
     Inherits from SQLAlchemy Base
 
     Attributes:
-        __tablename__ (str): The name of the Mysql
-        name (sqlalchemy String): name of the City.
-        state_id (sqlalchemy String): state id of the City.
+        __tablename__ : ThenameMysql
+        name : namCity.
+        state_id : thity.
     """
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)

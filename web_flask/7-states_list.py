@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Starts a Flask web application.
+"""Startsplication.
 
-The application listens on 0.0.0.0, port 5000.
+The
 Routes:
-    /states_list: HTML page with a list of all State objects in DBStorage.
+    /states_list: BStorage.
 """
 from models import storage
 from flask import Flask
@@ -14,17 +14,16 @@ app = Flask(__name__)
 
 @app.route("/states_list", strict_slashes=False)
 def states_list():
-    """Displays an HTML page with a list of all State objects in DBStorage.
+    """Displaystorage.
 
-    States are sorted by name.
-    """
+    Statname"""
     states = storage.all("State")
     return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
 def teardown(exc):
-    """Remove the current SQLAlchemy session."""
+    """Removesession."""
     storage.close()
 
 

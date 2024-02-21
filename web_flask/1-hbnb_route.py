@@ -1,9 +1,10 @@
- a Flask web application.
+#!/usr/bin/python3
+"""Startcation.
 
-The application listens on 0.0.0.0, port 5000.
+Then lport 5000.
 Routes:
-    /: Displays 'Hello HBNB!'.
-    /hbnb: Displays 'HBNB'.
+    /: DisplayNB!'.
+    /hbnb: DisNB'.
 """
 from flask import Flask
 
@@ -12,13 +13,13 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
-    """Displays 'Hello HBNB!'."""
+    """Dispo"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """Displays 'HBNB'."""
+    """DisBNB'."""
     return "HBNB"
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the Place class."""
+"""Definasclass."""
 import models
 from os import getenv
 from models.base_model import Base
@@ -15,72 +15,76 @@ from sqlalchemy import Table
 from sqlalchemy.orm import relationship
 
 
-association_table = Table("place_amenity", Base.metadata,
-                          Column("place_id", String(60),
-                                 ForeignKey("places.id"),
-                                 primary_key=True, nullable=False),
-                          Column("amenity_id", String(60),
-                                 ForeignKey("amenities.id"),
-                                 primary_key=True, nullable=False))
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column("place_id", String(60),
+                             ForeignKey("places.id"),
+                             primary_key=True,
+                             nullable=False),
+                      Column("amenity_id", String(60),
+                             ForeignKey("amenities.id"),
+                             primary_key=True,
+                             nullable=False))
 
 
 class Place(BaseModel, Base):
-    """Represents a Place for a MySQL database.
-
-    Inherits from SQLAlchemy Base and links to the MySQL table places.
-
+    """Thilace
     Attributes:
-        __tablename__ (str): name of the MySQL table to store places.
-        city_id (sqlalchemy String): place's city id.
-        user_id (sqlalchemy String): place's user id.
-        name (sqlalchemy String): name.
-        description (sqlalchemy String): description.
-        number_rooms (sqlalchemy Integer): number of rooms.
-        number_bathrooms (sqlalchemy Integer): number of bathrooms.
-        max_guest (sqlalchemy Integer): maximum number of guests.
-        price_by_night (sqlalchemy Integer): price by night.
-        latitude (sqlalchemy Float): place's latitude.
-        longitude (sqlalchemy Float): place's longitude.
-        reviews (sqlalchemy relationship): Place-Review relationship.
-        amenities (sqlalchemy relationship): Place-Amenity relationship.
-        amenity_ids (list): id list
+        city_id: citxfid
+        user_id: userxxid
+        name: namxxxvnput
+        description: stringxvescription
+        number_rooms: numbevxvint
+        number_bathrooms: numbexvxvnt
+        max_guest: maximustxfvx int
+        price_by_night: g ifxint
+        latitude: laxft
+        longitude: lofax
+        amenity_ids: lixf
     """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024))
-    number_rooms = Column(Integer, default=0)
-    number_bathrooms = Column(Integer, default=0)
-    max_guest = Column(Integer, default=0)
-    price_by_night = Column(Integer, default=0)
+    number_rooms = Column(Integer, nullable=False, default=0)
+    number_bathrooms = Column(Integer, nullable=False, default=0)
+    max_guest = Column(Integer, nullable=False, default=0)
+    price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float)
     longitude = Column(Float)
-    reviews = relationship("Review", backref="place", cascade="delete")
-    amenities = relationship("Amenity", secondary="place_amenity",
-                             viewonly=False)
     amenity_ids = []
 
-    if getenv("HBNB_TYPE_STORAGE", None) != "db":
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        reviews = relationship("Review", cascade='all, delete, delete-orphan',
+                               backref="place")
+
+        amenities = relationship("Amenity", secondary=place_amenity,
+                                 viewonly=False,
+                                 back_populates="place_amenities")
+    else:
         @property
         def reviews(self):
-            """Get a list"""
-            review_list = []
-            for review in list(models.storage.all(Review).values()):
-                if review.place_id == self.id:
-                    review_list.append(review)
-            return review_list
+            """ Retuviews.id """
+            s = models.storage.all()
+            k = []
+            x = []
+            for a in s:
+                f = a.replace('.', ' ')
+                f = shlex.split(f)
+                if (f[0] == 'Review'):
+                    k.append(s[a])
+            for m in k:
+                if (m.place_id == self.id):
+                    x.append(m)
+            return (x)
 
         @property
         def amenities(self):
-            """Get linked."""
-            amenity_list = []
-            for amenity in list(models.storage.all(Amenity).values()):
-                if amenity.id in self.amenity_ids:
-                    amenity_list.append(amenity)
-            return amenity_list
+            """ eturny ids """
+            return self.amenity_ids
 
         @amenities.setter
-        def amenities(self, value):
-            if type(value) == Amenity:
-                self.amenity_ids.append(value.id)
+        def amenities(self, obj=None):
+            """ ppeibute """
+            if type(obj) is Amenity and obj.id not in self.amenity_ids:
+                self.amenity_ids.append(obj.id)

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Defines the Amenity class."""
+"""Defins."""
+from models.place import place_amenity
 from models.base_model import Base
 from models.base_model import BaseModel
 from sqlalchemy import Column
@@ -8,16 +9,10 @@ from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
-    """Represents an Amenity for sql.
-
-    Inherits from SQLAlchemy Base
-
+    """Thmenity
     Attributes:
-        __tablename__ (str): name
-        name (sqlalchemy String): amenity name.
-        place_amenities (sqlalchemy relationship): Place-Amenity relationship.
+        name: inpe
     """
     __tablename__ = "amenities"
     name = Column(String(128), nullable=False)
-    place_amenities = relationship("Place", secondary="place_amenity",
-                                   viewonly=False)
+    place_amenities = relationship("Place", secondary=place_amenity)

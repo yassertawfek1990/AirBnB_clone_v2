@@ -1,35 +1,36 @@
 #!/usr/bin/python3
-"""Defines State class."""
-import models
-from os import getenv
-from models.base_model import Base
-from models.base_model import BaseModel
-from models.city import City
-from sqlalchemy import Column
-from sqlalchemy import String
+"""Tiss"""
+
 from sqlalchemy.orm import relationship
+from models.city import City
+import shlex
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, String
+import models
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class State(BaseModel, Base):
-    """Represents a state for a MySQL database.
-
-    Inherits from SQLAlchemy Base
-
+    """gffgnh
     Attributes:
-        __tablename__ (str): name of sql
-        name (sqlalchemy String): name of State.
-        cities (sqlalchemy relationship): State-City relationship.
+        name: ipae
     """
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
-    cities = relationship("City",  backref="state", cascade="delete")
+    cities = relationship("City", cascade='all, delete, delete-orphan',
+                          backref="state")
 
-    if getenv("HBNB_TYPE_STORAGE") != "db":
-        @property
-        def cities(self):
-            """Get a list of all related City objects."""
-            city_list = []
-            for city in list(models.storage.all(City).values()):
-                if city.state_id == self.id:
-                    city_list.append(city)
-            return city_list
+    @property
+    def cities(self):
+        s = models.storage.all()
+        k = []
+        x = []
+        for a in s:
+            f = a.replace('.', ' ')
+            f = shlex.split(f)
+            if (f[0] == 'City'):
+                k.append(s[a])
+        for m in k:
+            if (m.state_id == self.id):
+                x.append(m)
+        return (x)

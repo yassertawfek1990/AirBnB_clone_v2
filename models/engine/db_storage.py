@@ -33,6 +33,10 @@ class DBStorage:
         if env == "test":
             Base.metadata.drop_all(self.__engine)
 
+    def save(self):
+        """sv"""
+        self.__session.commit()
+
     def all(self, cls=None):
         """returonary"""
         z = {}
@@ -45,25 +49,12 @@ class DBStorage:
                 z[v] = m
         else:
             k = [State, City, User, Place, Review, Amenity]
-            for l in k:
-                r = self.__session.query(clase)
+            for lcd in k:
+                r = self.__session.query(lcd)
                 for m in r:
                     v = "{}.{}".format(type(m).__name__, m.id)
                     z[v] = m
         return (z)
-
-    def new(self, obj):
-        """adew"""
-        self.__session.add(obj)
-
-    def save(self):
-        """sv"""
-        self.__session.commit()
-
-    def delete(self, obj=None):
-        """detable"""
-        if obj:
-            self.session.delete(obj)
 
     def reload(self):
         """confi"""
@@ -71,6 +62,15 @@ class DBStorage:
         sec = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sec)
         self.__session = Session()
+
+    def new(self, obj):
+        """adew"""
+        self.__session.add(obj)
+
+    def delete(self, obj=None):
+        """detable"""
+        if obj:
+            self.session.delete(obj)
 
     def close(self):
         """ cal """

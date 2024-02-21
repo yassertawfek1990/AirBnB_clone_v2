@@ -1,8 +1,9 @@
- a Flask web application.
+#!/usr/bin/python3
+"""Staplication.
 
-The application listens on 0.0.0.0, port 5000.
+The applicat 5000.
 Routes:
-    /: Displays 'Hello HBNB!'
+    /: DiB!'
 """
 from flask import Flask
 
