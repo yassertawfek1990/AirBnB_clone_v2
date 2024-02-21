@@ -1,18 +1,11 @@
 #!/usr/bin/python3
 """Definasclass."""
-import models
 from os import getenv
-from models.base_model import Base
-from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.review import Review
-from sqlalchemy import Column
-from sqlalchemy import Float
-from sqlalchemy import ForeignKey
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy import Table
+import models
+from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+from models.base_model import BaseModel, Base
 
 
 place_amenity = Table("place_amenity", Base.metadata,

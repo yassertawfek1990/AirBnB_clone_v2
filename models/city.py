@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """Defnass."""
-from models.base_model import Base
-from models.base_model import BaseModel
-from sqlalchemy import Column
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
 from sqlalchemy.orm import relationship
+from models.place import Place
+from sqlalchemy import Column, Integer, String
+from sqlalchemy import ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from models.base_model import BaseModel, Base
 
 
 class City(BaseModel, Base):

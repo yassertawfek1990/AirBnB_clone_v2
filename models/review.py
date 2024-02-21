@@ -1,11 +1,8 @@
 #!/usr/bin/python3
-"""Defines class."""
-from models.base_model import Base
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column
-from models.base_model import BaseModel
+"""Definesclas"""
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy.ext.declarative import declarative_base
+from models.base_model import BaseModel, Base
 
 
 class Review(BaseModel, Base):

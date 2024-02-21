@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """Defins."""
+from sqlalchemy import Column, String
 from models.place import place_amenity
-from models.base_model import Base
-from models.base_model import BaseModel
-from sqlalchemy import Column
-from sqlalchemy import String
+from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 
 

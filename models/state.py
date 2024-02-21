@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """Tiss"""
 
-from sqlalchemy.orm import relationship
 from models.city import City
 import shlex
-from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
 import models
 from sqlalchemy.ext.declarative import declarative_base
+from models.base_model import BaseModel, Base
+from sqlalchemy.orm import relationship
 
 
 class State(BaseModel, Base):

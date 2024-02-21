@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """hiAirBnB"""
-import models
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
+import models
 
 Base = declarative_base()
 
