@@ -1,70 +1,76 @@
 #!/usr/bin/python3
-"""Defines the FileStorage class."""
-import json
-from models.base_model import BaseModel
+"""hrBnB"""
+
+import shlex
+from models.review import Review
+from models.place import Place
 from models.amenity import Amenity
 from models.city import City
-from models.place import Place
-from models.review import Review
 from models.state import State
 from models.user import User
+from models.base_model import BaseModel
+import json
 
 
 class FileStorage:
-    """Represent an abstracted storage engine.
-
+    """ Thcla
     Attributes:
-        __file_path (str): The name of the file to save objects to.
-        __objects (dict): A dictionary of instantiated objects.
+        __file_path: pafile
+        __objects: ostoed
     """
-
     __file_path = "file.json"
     __objects = {}
 
     def all(self, cls=None):
-        """Return a dictionary of instantiated objects in __objects.
-
-        If a cls is specified, returns a dictionary of objects of that type.
-        Otherwise, returns the __objects dictionary.
+        """ection
+        Return:
+            etu
         """
-        if cls is not None:
-            if type(cls) == str:
-                cls = eval(cls)
-            cls_dict = {}
-            for k, v in self.__objects.items():
-                if type(v) == cls:
-                    cls_dict[k] = v
-            return cls_dict
-        return self.__objects
+        z = {}
+        if cls:
+            za = self.__objects
+            for v in za:
+                k = v.replace('.', ' ')
+                k = shlex.split(k)
+                if (k[0] == cls.__name__):
+                    z[v] = self.__objects[v]
+            return (z)
+        else:
+            return self.__objects
 
     def new(self, obj):
-        """Set in __objects obj with key <obj_class_name>.id."""
-        self.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
+        """setobj
+        Args:
+            obj: gt
+        """
+        if obj:
+            v = "{}.{}".format(type(obj).__name__, obj.id)
+            self.__objects[v] = obj
 
     def save(self):
-        """Serialize __objects to the JSON file __file_path."""
-        odict = {o: self.__objects[o].to_dict() for o in self.__objects.keys()}
-        with open(self.__file_path, "w", encoding="utf-8") as f:
-            json.dump(odict, f)
+        """sria"""
+        x = {}
+        for a, s in self.__objects.items():
+            x[a] = s.to_dict()
+        with open(self.__file_path, 'w', encoding="UTF-8") as b:
+            json.dump(x, b)
 
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        """aliz"""
         try:
-            with open(self.__file_path, "r", encoding="utf-8") as f:
-                for o in json.load(f).values():
-                    name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(name)(**o))
+            with open(self.__file_path, 'r', encoding="UTF-8") as b:
+                for a, s in (json.load(b)).items():
+                    s = eval(s["__class__"])(**s)
+                    self.__objects[a] = s
         except FileNotFoundError:
             pass
 
     def delete(self, obj=None):
-        """Delete a given object from __objects, if it exists."""
-        try:
-            del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
-        except (AttributeError, KeyError):
-            pass
+        """ eexi"""
+        if obj:
+            a = "{}.{}".format(type(obj).__name__, obj.id)
+            del self.__objects[a]
 
     def close(self):
-        """Call the reload method."""
+        """ lls"""
         self.reload()
